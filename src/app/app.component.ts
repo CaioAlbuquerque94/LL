@@ -16,33 +16,21 @@ export class AppComponent {
     public util: UtilService
   ) { }
 
-  /* Set the width of the sidebar to 250px and the left margin of the page content to 250px */
-  openNav() {
-    document.getElementById('mySidebar').style.width = "250px";
-    document.getElementById('main').style.marginLeft = "250px";
-  }
-
-  /* Set the width of the sidebar to 0 and the left margin of the page content to 0 */
-  closeNav() {
-    document.getElementById('mySidebar').style.width = "50px";
-    document.getElementById('main').style.marginLeft = "0";
-  }
   fixedSideBar() {
     this.isFixedOpenCloseNav = !this.isFixedOpenCloseNav;
+    if (this.isFixedOpenCloseNav) {
+      document.getElementById('main').style.marginLeft = '230px';
+    } else {
+      document.getElementById('main').style.marginLeft = '30px';
+    }
   }
-  openCloseNav(param) {
-    // this.isFixedOpenCloseNav =  param === 'fixed' ? true : false;
-    // if (param === 'fixed') {
-    //   this.isFixedOpenCloseNav = !this.isFixedOpenCloseNav;
-    // }
+  openCloseNav() {
     if (!this.isFixedOpenCloseNav) {
       this.isOpenCloseNav = !this.isOpenCloseNav;
       if (this.isOpenCloseNav) {
-        document.getElementById('mySidebar').style.left = "0px"
-        document.getElementById('main').style.marginLeft = "230px";
+        document.getElementById('mySidebar').style.left = '0px';
       } else {
-        document.getElementById('mySidebar').style.left = "-200px";
-        document.getElementById('main').style.marginLeft = "30px";
+        document.getElementById('mySidebar').style.left = '-200px';
       }
     }
   }

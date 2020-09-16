@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HotListComponent } from './hot-list/hot-list.component';
 
 @Component({
   selector: 'app-home',

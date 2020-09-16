@@ -9,7 +9,7 @@
         <a class="py-2 d-none d-md-inline-block" href="#">Sobre</a>
     </div>
 </nav>
-<div id="mySidebar" class="sidebar" (mouseenter) ="openCloseNav('enter')" (mouseleave) ="openCloseNav('leave')">
+<div id="mySidebar" class="sidebar" (mouseenter) ="openCloseNav()" (mouseleave) ="openCloseNav()">
     <span class="pull-right p-0 mr-3 text-success" (click)="fixedSideBar()" *ngIf="isOpenCloseNav" >
         <i class="fa fa-check-square-o" data-container="body" *ngIf="isFixedOpenCloseNav"></i>
         <i class="fa fa-square-o" data-container="body" *ngIf="!isFixedOpenCloseNav"></i>
