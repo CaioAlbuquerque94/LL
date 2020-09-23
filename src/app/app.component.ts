@@ -19,19 +19,19 @@ export class AppComponent {
   fixedSideBar() {
     this.isFixedOpenCloseNav = !this.isFixedOpenCloseNav;
     if (this.isFixedOpenCloseNav) {
-      document.getElementById('main').style.marginLeft = '230px';
+      document.getElementById('main').style.marginLeft = '250px';
     } else {
-      document.getElementById('main').style.marginLeft = '30px';
+      document.getElementById('main').style.marginLeft = '50px';
     }
   }
   openCloseNav() {
-    if (!this.isFixedOpenCloseNav) {
-      this.isOpenCloseNav = !this.isOpenCloseNav;
-      if (this.isOpenCloseNav) {
-        document.getElementById('mySidebar').style.left = '0px';
-      } else {
-        document.getElementById('mySidebar').style.left = '-200px';
-      }
-    }
+    // if (!this.isFixedOpenCloseNav) {
+    //   this.isOpenCloseNav = !this.isOpenCloseNav;
+    //   if (this.isOpenCloseNav) {
+    //     document.getElementById('mySidebar').style.left = '0px';
+    //   } else {
+    //     document.getElementById('mySidebar').style.left = '-200px';
+    //   }
+    // }
   }
 }
