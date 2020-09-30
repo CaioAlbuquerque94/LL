@@ -1,0 +1,10 @@
+.imgDetail{
+    max-width: 430px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.imgBlockDetail{
+    width: 430px;
+    border: 1px solid rgba(0,0,0,.125)
+}

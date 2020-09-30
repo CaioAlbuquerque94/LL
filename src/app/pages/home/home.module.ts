@@ -1,20 +1,21 @@
-import { CardImageTextModule } from 'src/app/shared/card-image-text/card-image-text.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CardImageTextModule } from 'src/app/shared/card-image-text/card-image-text.module';
 import { HomeComponent } from './home.component';
-import { HotListComponent } from './hot-list/hot-list.component';
-import { CardImageTextComponent } from 'src/app/shared/card-image-text/card-image-text.component';
-
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
-    HotListComponent,
   ],
   imports: [
+    FormsModule,
+    ReactiveFormsModule,
     CommonModule,
-    CardImageTextModule
+    CardImageTextModule,
+    ModalModule.forRoot()
   ],
   exports: [
     HomeComponent

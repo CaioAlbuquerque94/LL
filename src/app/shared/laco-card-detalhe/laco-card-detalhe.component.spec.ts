@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HotListComponent } from './hot-list.component';
+import { LacoCardDetalheComponent } from './laco-card-detalhe.component';
 
-describe('HotListComponent', () => {
-  let component: HotListComponent;
-  let fixture: ComponentFixture<HotListComponent>;
+describe('LacoCardDetalheComponent', () => {
+  let component: LacoCardDetalheComponent;
+  let fixture: ComponentFixture<LacoCardDetalheComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HotListComponent ]
+      declarations: [ LacoCardDetalheComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HotListComponent);
+    fixture = TestBed.createComponent(LacoCardDetalheComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

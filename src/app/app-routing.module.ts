@@ -4,11 +4,10 @@ import { AlbumComponent } from './pages/album/album.component';
 import { HomeComponent } from './pages/home/home.component';
 
 
-const routes: Routes = [
+export const routes: Routes = [
+  { path : 'album' , component: AlbumComponent },
   {
     path: '', component: HomeComponent, children: [
-      { path : '' , component: HomeComponent },
-      { path : 'album' , component: AlbumComponent },
     ]
   }
 ];

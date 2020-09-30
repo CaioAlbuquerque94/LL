@@ -34,4 +34,7 @@ export class AppComponent {
     //   }
     // }
   }
+  addNewPost(){
+    console.log("Adding new Post");
+  }
 }

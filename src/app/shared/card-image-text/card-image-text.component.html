@@ -1,4 +1,4 @@
-<div class="card">
+<div class="card" (click)="cardCLicked(obj)">
     <img class="img-card" src="{{obj?.img}}">
     <div class="card-body">
         <h5 class="card-title">{{obj?.titulo}}</h5>
@@ -7,4 +7,17 @@
         <div class="card-footer">
         <small class="text-muted">{{obj?.dataPublicacao}}</small>
     </div>
+</div>
+<div bsModal #modalLacoCardDetalhe="bs-modal" [config]="{backdrop: 'static', keyboard: false}"
+  class="modal item-modal fade fill-in" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-md">
+      <div class="modal-content">
+          <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="modalLacoCardDetalhe.hide()" >
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <app-laco-card-detalhe [obj]="obj"></app-laco-card-detalhe>
+        </div>
+    </div>
+  </div>
 </div>
