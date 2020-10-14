@@ -72,20 +72,3 @@
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
 }
-
-.modal-md {
-  max-width: calc(100% - 200px) !important;
-  width: calc(100% - 300px) !important;
-}
-@media (min-width: 992px) {
-  .modal-lg {
-      max-width: calc(100% - 100px);
-      width: calc(100% - 100px) !important;
-  }
-}
-@media (min-width: 720px) {
-  .modal-md {
-    max-width: calc(100% - 200px) !important;
-    width: calc(100% - 300px) !important;
-  }
-}

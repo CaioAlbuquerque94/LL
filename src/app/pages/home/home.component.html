@@ -5,14 +5,14 @@
         <a class="btn btn-outline-secondary" (click)="addCard()" >Coming soon</a>
     </div>
 </div>
-<section class="row row-no-margin">
+<section class="row-no-margin mt-3">
     <div class="{{col_resposive}}" *ngFor="let item of newestList" >
         <app-card-image-text [obj]="item"></app-card-image-text>
     </div>
 </section>
 <div bsModal #modalAddCard="bs-modal" [config]="{backdrop: 'static', keyboard: false}" class="modal fade stick-up"
     tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Adicione uma nova publicação</h5>
@@ -21,16 +21,21 @@
                 </button>
             </div>
             <div class="modal-body text-center m-t-20">
-                <form class="row" role="form" [formGroup]="cardObjForm" (ngSubmit)="addNewCard()">
+                <form role="form" [formGroup]="cardObjForm" (ngSubmit)="addNewCard()">
                     <div class="form-group">
-                      <label >Imagen</label>
-                      <input class="form-control required" type="text" formControlName="img" placeholder="Insira uma imagem" required>
-                      <label >Título</label>
-                      <input class="form-control required" type="text" formControlName="titulo" placeholder="Insira um título" required>
-                      <label >Descrição</label>
-                      <input class="form-control required" type="text" formControlName="texto" placeholder="Insira uma descrição" required>
+                      <label class="required">Imagem</label>
+                      <input class="form-control required" type="file" class="form-control-file" formControlName="img" placeholder="Insira uma imagem" required>
                     </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <div class="form-group">
+                      <label class="required">Título</label>
+                      <input class="form-control required" type="text" formControlName="titulo" placeholder="Insira um título" required>
+                      <p *ngIf="!cardObjForm.value['titulo']" class="text-danger">*adicione um titulo</p>
+                    </div>
+                    <div class="form-group">
+                      <label >Descrição</label>
+                      <textarea  class="form-control required" rows="3" formControlName="texto" placeholder="Insira uma descrição..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-sm pull-right">Submit</button>
                 </form>
             </div>
         </div>

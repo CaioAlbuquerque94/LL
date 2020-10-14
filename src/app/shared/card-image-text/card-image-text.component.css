@@ -1,6 +1,12 @@
 .img-card {
-    max-width: 300px;
+    /* max-width: 415px; */
+    width: -webkit-fill-available;
 }
 .card{
     margin-right: 1rem !important;
+}
+.card:hover{
+    background-color:rgba(0,0,0,.03);
+    border-color: rgba(88, 88, 88, 0.699);
+    cursor: pointer;
 }

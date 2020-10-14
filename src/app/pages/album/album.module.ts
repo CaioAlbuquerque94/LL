@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { AlbumComponent } from './album.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    AlbumComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    ModalModule.forRoot()
   ]
 })
 export class AlbumModule { }
