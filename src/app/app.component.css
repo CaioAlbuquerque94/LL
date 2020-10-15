@@ -14,12 +14,11 @@
  */
 
 .site-header {
-  background-color: rgba(0, 0, 0, .85);
-  -webkit-backdrop-filter: saturate(180%) blur(20px);
-  backdrop-filter: saturate(180%) blur(20px);
+  max-width: 1440px;
+  margin: auto;
 }
 .site-header a {
-  color: #999;
+  color: black;
   transition: ease-in-out color .15s;
 }
 .site-header a:hover {
@@ -61,14 +60,39 @@
 }
 
 /* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-#main {
-  transition: margin-left .7s; /* If you want a transition effect */
+/* #main {
+  transition: margin-left .7s;
   padding-left: 20px;
   margin-left: 50px;
-}
+} */
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
   .sidebar {padding-top: 15px;}
   .sidebar a {font-size: 18px;}
+}
+
+.boxed-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  box-shadow: 0 16px 48px rgba(255,255,255,0.5);
+  overflow: hidden;
+  background-color: #f8f9fa;
+  padding-bottom: 20px;
+}
+.outside{
+  background-color: lightskyblue;
+  color: black;
+  min-height: -webkit-fill-available;
+  /* background-image: url('https://github.com/CaioAlbuquerque94/testeLL2/blob/master/_images/laco_transparente_pequeno.png?raw=true'); */
+}
+.laco_background_start{
+  min-width: 500px;
+  position: absolute;
+  margin-left: 15px;
+}
+.laco_background_end{
+  min-width: 500px;
+  position: absolute;
+  margin-left: 1390px;
 }

@@ -1,31 +1,34 @@
-<nav id="myNavbar" class="site-header sticky-top py-1">
-    <div class="container d-flex flex-column flex-md-row justify-content-between">
-        <a class="py-2" routerLink="" aria-label="Product">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="d-block mx-auto" role="img" viewBox="0 0 24 24" focusable="false"><title>Product</title><circle cx="12" cy="12" r="10"></circle><path d="M14.31 8l5.74 9.94M9.69 8h11.48M7.38 12l5.74-9.94M9.69 16L3.95 6.06M14.31 16H2.83m13.79-4l-5.74 9.94"></path></svg>
-        </a>
-        <a class="py-2 d-none d-md-inline-block" routerLink="/" >Início</a>
-        <a class="py-2 d-none d-md-inline-block" routerLink="/album">Fotos</a>
-        <a class="py-2 d-none d-md-inline-block" routerLink="/">Faça uma encomenda</a>
-        <a class="py-2 d-none d-md-inline-block" routerLink="/">Sobre</a>
-    </div>
-</nav>
-<div id="mySidebar" class="sidebar" (mouseenter) ="openCloseNav()" (mouseleave) ="openCloseNav()">
-    <span class="pull-right p-0 mr-3 text-success" (click)="fixedSideBar()" *ngIf="isOpenCloseNav" >
-        <i class="fa fa-check-square-o" data-container="body" *ngIf="isFixedOpenCloseNav"></i>
-        <i class="fa fa-square-o" data-container="body" *ngIf="!isFixedOpenCloseNav"></i>
-    </span>
-    <div class="mt-5">
-        <ul class="pl-0">
-            <li (click)="addNewPost()">
-                <a routerLink="album">
-                    <span>About</span>
-                    <i class="fa fa-plus pr-2 text-success pull-right" data-container="body"></i>
-                </a>
-                <hr>
-            </li>
-        </ul>
-    </div>
-</div>
-<div id="main">
-    <router-outlet></router-outlet>
+<div class="outside">
+    <nav id="myNavbar" class="site-header py-1">
+        <div class="container d-flex flex-column flex-md-row justify-content-between">
+            <a routerLink=""><img src="https://github.com/CaioAlbuquerque94/testeLL2/blob/master/_images/laco_transparente_pequeno.png?raw=true" alt="Inicio"></a>
+            <a class="py-2 d-none d-md-inline-block" routerLink="/album">Fotos</a>
+            <a class="py-2 d-none d-md-inline-block" routerLink="/">Faça uma encomenda</a>
+            <a class="py-2 d-none d-md-inline-block" routerLink="/">Sobre</a>
+        </div>
+    </nav>
+    <section>
+        <img class="laco_background_start" src="{{laco_transparente_pequeno}}">
+        <img class="laco_background_end" src="{{laco_transparente_pequeno}}">
+    </section>
+        <!-- <div id="mySidebar" class="sidebar" (mouseenter) ="openCloseNav()" (mouseleave) ="openCloseNav()">
+            <span class="pull-right p-0 mr-3 text-success" (click)="fixedSideBar()" *ngIf="isOpenCloseNav" >
+                <i class="fa fa-check-square-o" data-container="body" *ngIf="isFixedOpenCloseNav"></i>
+                <i class="fa fa-square-o" data-container="body" *ngIf="!isFixedOpenCloseNav"></i>
+            </span>
+            <div class="mt-5">
+                <ul class="pl-0">
+                    <li (click)="addNewPost()">
+                        <a routerLink="album">
+                            <span>About</span>
+                            <i class="fa fa-plus pr-2 text-success pull-right" data-container="body"></i>
+                        </a>
+                        <hr>
+                    </li>
+                </ul>
+            </div>
+        </div> -->
+        <div id="main" class="boxed-container">
+            <router-outlet></router-outlet>
+        </div>
 </div>

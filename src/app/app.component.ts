@@ -11,7 +11,7 @@ export class AppComponent {
   isOpenCloseNav = false;
   isFixedOpenCloseNav = false;
   myContainer = document.getElementById('mySidebar') as HTMLInputElement;
-
+  laco_transparente_pequeno : any = "https://github.com/CaioAlbuquerque94/testeLL2/blob/master/_images/laco_transparente_pequeno.png?raw=true";
   constructor(
     public util: UtilService
   ) { }
