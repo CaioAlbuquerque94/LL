@@ -11,10 +11,13 @@ export class AppComponent {
   isOpenCloseNav = false;
   isFixedOpenCloseNav = false;
   myContainer = document.getElementById('mySidebar') as HTMLInputElement;
-  laco_transparente_pequeno : any = "https://github.com/CaioAlbuquerque94/testeLL2/blob/master/_images/laco_transparente_pequeno.png?raw=true";
+  laco_transparente_pequeno : any = "https://github.com/CaioAlbuquerque94/lane-lacos/blob/master/src/_images/laco_transparente_pequeno.png?raw=true";
+  bigScreen: boolean = false;
   constructor(
     public util: UtilService
-  ) { }
+  ) { 
+    this.bigScreen = (document.documentElement.clientWidth >= 1440);
+  }
 
   fixedSideBar() {
     this.isFixedOpenCloseNav = !this.isFixedOpenCloseNav;

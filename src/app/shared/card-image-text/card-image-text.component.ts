@@ -10,15 +10,12 @@ export class CardImageTextComponent implements OnInit {
 
   @Input() obj : { id: any, titulo: string, texto: string, img: string, dataPublicacao: Date };
   @ViewChild("modalLacoCardDetalhe") modalLacoCardDetalhe: ModalDirective;
-  clicked :boolean = false;
   constructor() { }
 
   ngOnInit(): void {
   }
 
   cardCLicked(obj){
-    console.log(obj);
-    this.clicked = !this.clicked;
     this.modalLacoCardDetalhe.show();
   }
 }

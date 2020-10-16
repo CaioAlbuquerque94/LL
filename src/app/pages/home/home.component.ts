@@ -13,13 +13,6 @@ export class HomeComponent implements OnInit {
   @ViewChild("modalAddCard") modalAddCard: ModalDirective;
   col_resposive : string = "col-xl-3 col-lg-4 col-md-6 col-12";
   cardObjForm: FormGroup;
-  cardObj : any = {
-    id : 0,
-    img : "https://media-cdn.tripadvisor.com/media/photo-s/15/22/5e/31/img-20180921-wa0043-largejpg.jpg",
-    texto : "Texto de teste",
-    titulo : "Titulo teste",
-    dataPublicacao : new Date()
-  }
   newestList : any = [];
 
   constructor(
@@ -28,9 +21,25 @@ export class HomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    for (let i = 0; i < 4; i++) {
-      this.cardObj.id = (Math.random() *100).toFixed(0);
-      this.newestList.push(this.cardObj);
+    // this.util.list().subscribe(data => {
+    //   if(data){
+    //     this.newestList = data;
+    //     for (const items of this.newestList) {
+    //       items.dataPublicacao = new Date();
+    //     }
+    //   }else{
+    //     this.newestList = [];
+    //   }
+    // });
+
+    let data = this.util.list();
+    if(data){
+      this.newestList = data;
+      for (const items of this.newestList) {
+        items.dataPublicacao = new Date();
+      }
+    }else{
+      this.newestList = [];
     }
 
     this.cardObjForm = this.formBuilder.group({

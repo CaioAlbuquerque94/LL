@@ -1,15 +1,15 @@
 <div class="outside">
     <nav id="myNavbar" class="site-header py-1">
         <div class="container d-flex flex-column flex-md-row justify-content-between">
-            <a routerLink=""><img src="https://github.com/CaioAlbuquerque94/testeLL2/blob/master/_images/laco_transparente_pequeno.png?raw=true" alt="Inicio"></a>
+            <a routerLink=""><img src="{{laco_transparente_pequeno}}" alt="Inicio"></a>
             <a class="py-2 d-none d-md-inline-block" routerLink="/album">Fotos</a>
             <a class="py-2 d-none d-md-inline-block" routerLink="/">Faça uma encomenda</a>
             <a class="py-2 d-none d-md-inline-block" routerLink="/">Sobre</a>
         </div>
     </nav>
     <section>
-        <img class="laco_background_start" src="{{laco_transparente_pequeno}}">
-        <img class="laco_background_end" src="{{laco_transparente_pequeno}}">
+        <img class="laco_background_start" src="{{laco_transparente_pequeno}}" *ngIf="bigScreen" >
+        <img class="laco_background_end" src="{{laco_transparente_pequeno}}" *ngIf="bigScreen">
     </section>
         <!-- <div id="mySidebar" class="sidebar" (mouseenter) ="openCloseNav()" (mouseleave) ="openCloseNav()">
             <span class="pull-right p-0 mr-3 text-success" (click)="fixedSideBar()" *ngIf="isOpenCloseNav" >

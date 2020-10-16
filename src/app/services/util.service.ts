@@ -1,7 +1,6 @@
 import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Item } from '../pages/album/item';
 
 
 @Injectable({
@@ -20,13 +19,33 @@ export class UtilService {
   col_resposive : string = "col-xl-3 col-lg-4 col-md-6 col-12";
   private readonly API = environment.API
   // private readonly API = 'http://localhost:3000/item'
+
+  // cardObj : any = {
+  //   id : 0,
+  //   img : "https://media-cdn.tripadvisor.com/media/photo-s/15/22/5e/31/img-20180921-wa0043-largejpg.jpg",
+  //   texto : "Texto de teste",
+  //   titulo : "Titulo teste",
+  //   dataPublicacao : new Date()
+  // }
+
   constructor(
     private readonly http: HttpClient,
   ) { }
 
   list (){
-    return this.http.get<Item[]>(this.API+"item");
+    // return this.http.get(this.API+"item");
+   return [
+      {"id" : 1, "img" : "https://media-cdn.tripadvisor.com/media/photo-s/15/22/5e/31/img-20180921-wa0043-largejpg.jpg",
+        "texto" : "Texto de teste", "titulo" : "Titulo teste", "dataPublicacao" : null},
+      {"id" : 2, "img" : "https://media-cdn.tripadvisor.com/media/photo-s/15/22/5e/31/img-20180921-wa0043-largejpg.jpg",
+        "texto" : "Texto de teste", "titulo" : "Titulo teste", "dataPublicacao" : null},
+      {"id" : 3, "img" : "https://media-cdn.tripadvisor.com/media/photo-s/15/22/5e/31/img-20180921-wa0043-largejpg.jpg",
+        "texto" : "Texto de teste", "titulo" : "Titulo teste", "dataPublicacao" : null},
+      {"id" : 4, "img" : "https://media-cdn.tripadvisor.com/media/photo-s/15/22/5e/31/img-20180921-wa0043-largejpg.jpg",
+        "texto" : "Texto de teste", "titulo" : "Titulo teste", "dataPublicacao" : null},
+      {"id" : 5, "img" : "https://media-cdn.tripadvisor.com/media/photo-s/15/22/5e/31/img-20180921-wa0043-largejpg.jpg",
+        "texto" : "Texto de teste", "titulo" : "Titulo teste", "dataPublicacao" : null}
+  ]
   }
-
 
 }

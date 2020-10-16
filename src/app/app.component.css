@@ -94,5 +94,5 @@
 .laco_background_end{
   min-width: 500px;
   position: absolute;
-  margin-left: 1390px;
+  margin-left: calc(100% - 515px) !important;
 }

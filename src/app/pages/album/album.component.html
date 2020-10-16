@@ -2,9 +2,15 @@
     <div class="col-md-6 p-lg-4 mx-auto my-5">
         <h1 class="display-4 font-weight-normal">Lane Laços</h1>
         <p class="lead font-weight-normal">Conheça nossos laços e gravatas para cachorros. Produtos feitos à mão para todas as raças, com cores variadas, temáticas e tamanhos diferentes. Tudo para o seu companheiro animal ficar ainda mais lindo</p>
-        <button class="btn btn-primary" (click)="modalAddCard.show()" >Add Card</button>
+        <button class="btn btn-primary" (click)="modalAddCard.show()">Add Card</button>
+        <h1>{{selectedItem}}</h1>
     </div>
 </div>
+<section class="row-no-margin mt-3">
+    <div class="col-xl-3 col-lg-4 col-md-6 col-12" *ngFor="let item of bookList" >
+        <app-card-image-text [obj]="item"></app-card-image-text>
+    </div>
+</section>
 <div bsModal #modalAddCard="bs-modal" [config]="{backdrop: 'static', keyboard: false}" class="modal fade stick-up"
     tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
