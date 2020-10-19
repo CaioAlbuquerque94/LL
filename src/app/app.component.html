@@ -1,34 +1,26 @@
 <div class="outside">
     <nav id="myNavbar" class="site-header py-1">
-        <div class="container d-flex flex-column flex-md-row justify-content-between">
-            <a routerLink=""><img src="{{laco_transparente_pequeno}}" alt="Inicio"></a>
-            <a class="py-2 d-none d-md-inline-block" routerLink="/album">Fotos</a>
-            <a class="py-2 d-none d-md-inline-block" routerLink="/">Faça uma encomenda</a>
-            <a class="py-2 d-none d-md-inline-block" routerLink="/">Sobre</a>
+        <div class="container d-flex flex-md-row justify-content-between text-center">
+            <a routerLink=""><img src="{{laco_transparente_pequeno}}" class="pr-2" alt="Inicio"></a>
+            <a class="py-2 d-md-inline-block" routerLink="/album">Fotos</a>
+            <a class="py-2 d-md-inline-block" routerLink="/">Faça uma encomenda</a>
+            <a class="py-2 d-md-inline-block" routerLink="/login">Login</a>
         </div>
     </nav>
     <section>
         <img class="laco_background_start" src="{{laco_transparente_pequeno}}" *ngIf="bigScreen" >
         <img class="laco_background_end" src="{{laco_transparente_pequeno}}" *ngIf="bigScreen">
     </section>
-        <!-- <div id="mySidebar" class="sidebar" (mouseenter) ="openCloseNav()" (mouseleave) ="openCloseNav()">
-            <span class="pull-right p-0 mr-3 text-success" (click)="fixedSideBar()" *ngIf="isOpenCloseNav" >
-                <i class="fa fa-check-square-o" data-container="body" *ngIf="isFixedOpenCloseNav"></i>
-                <i class="fa fa-square-o" data-container="body" *ngIf="!isFixedOpenCloseNav"></i>
-            </span>
-            <div class="mt-5">
-                <ul class="pl-0">
-                    <li (click)="addNewPost()">
-                        <a routerLink="album">
-                            <span>About</span>
-                            <i class="fa fa-plus pr-2 text-success pull-right" data-container="body"></i>
-                        </a>
-                        <hr>
-                    </li>
-                </ul>
-            </div>
-        </div> -->
-        <div id="main" class="boxed-container">
-            <router-outlet></router-outlet>
+    <div class="boxed-container">
+        <router-outlet></router-outlet>
+    </div>
+    <footer class="text-muted mt-3 pb-3">
+        <div class="container">
+          <p class="float-right">
+            <a href="#">Voltar ao topo</a>
+          </p>
+          <p>&copy;Lane Laços, é produção artesanal e feita com carinho!</p>
+          <p>Mora na Região Metropolitana do Recife e quer encomendar? <a routerLink="/login">Faça o login</a> e coloque seus laços prefiridos no cesto.</p>
         </div>
+    </footer>
 </div>

@@ -1,4 +1,4 @@
-import { UtilService } from './../../services/util.service';
+import { UtilService } from './../../services/util/util.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';

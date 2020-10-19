@@ -2,16 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AlbumComponent } from './pages/album/album.component';
 import { HomeComponent } from './pages/home/home.component';
-import { LacoCardDetalheComponent } from './shared/laco-card-detalhe/laco-card-detalhe.component';
+import { LoginComponent } from './pages/login/login.component';
 
 
 export const routes: Routes = [
+  { path : '', component: HomeComponent },
   { path : 'album' , component: AlbumComponent },
   { path : 'album/:id' , component: AlbumComponent },
-  {
-    path: '', component: HomeComponent, children: [
-    ]
-  }
+  { path : 'login', component: LoginComponent }
 ];
 
 @NgModule({

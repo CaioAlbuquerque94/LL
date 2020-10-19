@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Observable, Subscription } from 'rxjs';
-import { UtilService } from 'src/app/services/util.service';
+import { UtilService } from 'src/app/services/util/util.service';
 
 @Component({
   selector: 'app-album',

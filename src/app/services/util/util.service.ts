@@ -1,4 +1,4 @@
-import { environment } from './../../environments/environment';
+import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -19,14 +19,6 @@ export class UtilService {
   col_resposive : string = "col-xl-3 col-lg-4 col-md-6 col-12";
   private readonly API = environment.API
   // private readonly API = 'http://localhost:3000/item'
-
-  // cardObj : any = {
-  //   id : 0,
-  //   img : "https://media-cdn.tripadvisor.com/media/photo-s/15/22/5e/31/img-20180921-wa0043-largejpg.jpg",
-  //   texto : "Texto de teste",
-  //   titulo : "Titulo teste",
-  //   dataPublicacao : new Date()
-  // }
 
   constructor(
     private readonly http: HttpClient,

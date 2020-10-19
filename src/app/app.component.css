@@ -9,10 +9,6 @@
   margin-left: 0px;
 }
 
-/*
- * Custom translucent site header
- */
-
 .site-header {
   max-width: 1440px;
   margin: auto;
@@ -25,52 +21,6 @@
   color: #fff;
   text-decoration: none;
 }
-/* The sidebar menu */
-.sidebar {
-  height: 100%; /* 100% Full-height */
-  width: 250px; /* 0 width - change this with JavaScript */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Stay on top */
-  top: 48px;
-  left: -200px;
-  background-color: rgba(0, 0, 0, .85); /* Black*/
-  overflow-x: hidden; /* Disable horizontal scroll */
-  padding-top: 20px; /* Place content 50px from the top */
-  transition: 0.7s; /* 0.5 second transition effect to slide in the sidebar */
-}
-
-/* The sidebar links */
-.sidebar a {
-  padding: 5px 5px 5px 15px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.7s;
-}
-
-/* When you mouse over the navigation links, change their color */
-.sidebar a:hover {
-  color: #f1f1f1;
-}
-
-.sidebar hr {
-  margin: auto;
-  border-color: #818181;
-}
-
-/* Style page content - use this if you want to push the page content to the right when you open the side navigation */
-/* #main {
-  transition: margin-left .7s;
-  padding-left: 20px;
-  margin-left: 50px;
-} */
-
-/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
-@media screen and (max-height: 450px) {
-  .sidebar {padding-top: 15px;}
-  .sidebar a {font-size: 18px;}
-}
 
 .boxed-container {
   max-width: 1440px;
@@ -79,6 +29,7 @@
   overflow: hidden;
   background-color: #f8f9fa;
   padding-bottom: 20px;
+  position: relative;
 }
 .outside{
   background-color: lightskyblue;
@@ -89,10 +40,13 @@
 .laco_background_start{
   min-width: 500px;
   position: absolute;
-  margin-left: 15px;
+  left: 15px;
 }
 .laco_background_end{
   min-width: 500px;
   position: absolute;
-  margin-left: calc(100% - 515px) !important;
+  right: 15px;
+}
+.text-white{
+  color: #fff;
 }

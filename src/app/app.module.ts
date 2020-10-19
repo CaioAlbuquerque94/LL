@@ -1,12 +1,13 @@
-import { AlbumModule } from './pages/album/album.module';
-import { HomeModule } from './pages/home/home.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { routes } from './app-routing.module';
+import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
+import { AlbumModule } from './pages/album/album.module';
+import { HomeModule } from './pages/home/home.module';
+import { LoginModule } from './pages/login/login.module';
+import { AuthService } from './services/auth/auth.service';
 
 @NgModule({
   declarations: [
@@ -14,12 +15,15 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(routes, {scrollPositionRestoration: 'top'}),
+    AppRoutingModule,
     HomeModule,
     AlbumModule,
-    HttpClientModule
+    HttpClientModule,
+    LoginModule
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

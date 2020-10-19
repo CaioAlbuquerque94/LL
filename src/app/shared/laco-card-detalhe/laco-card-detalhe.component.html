@@ -4,8 +4,12 @@
             <img class="imgDetail" src="{{obj?.img}}">
         </div>
     </div>
-    <div class="col-5 pointer" [routerLink]="['album',obj?.id]">
+    <div class="col-5">
         <h5>{{obj?.titulo}}</h5>
         <p>{{obj?.texto}}</p>
+        <div class="pull-bottom-right">
+            <a class="btn btn-sm btn-info text-white mr-2" routerLink="/album/{{obj?.id}}">Ver mais detalhes</a>
+            <button class="btn btn-sm btn-primary text-white">Adicionar ao cesto</button>
+        </div>
     </div>
 </div>

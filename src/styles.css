@@ -25,3 +25,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   margin-right: 0px;
   margin-left: 0px;
 }
+
+.pull-bottom{
+  position: absolute;
+  bottom: 15px;
+}
+
+.pull-bottom-right{
+  position: absolute;
+  bottom: 15px;
+  right: 10px;
+}

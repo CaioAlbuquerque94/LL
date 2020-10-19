@@ -3,7 +3,8 @@
     width: -webkit-fill-available;
 }
 .card{
-    margin-right: 1rem !important;
+    /* margin-right: 1rem !important; */
+    margin-bottom: 15px;
 }
 .card:hover{
     background-color:rgba(0,0,0,.03);
