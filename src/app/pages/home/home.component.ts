@@ -14,11 +14,18 @@ export class HomeComponent implements OnInit {
   col_resposive : string = "col-xl-3 col-lg-4 col-md-6 col-12";
   cardObjForm: FormGroup;
   newestList : any = [];
+  isactive = false;
+  isactive2 = false;
+  focusItem: string = "#focus1";
 
   constructor(
     private formBuilder: FormBuilder,
     public util : UtilService
   ) { }
+
+  ngAfterViewInit() {
+    this.isactive = true;
+  }
 
   ngOnInit(): void {
     // this.util.list().subscribe(data => {
@@ -50,12 +57,33 @@ export class HomeComponent implements OnInit {
     })
   }
   addCard(){
+    this.isactive = false;
     this.modalAddCard.show();
+    this.focusItem = "#focus2"
+    this.isactive2 = true;
   }
 
   addNewCard(){
     if(this.cardObjForm.valid){
       this.newestList.unshift(this.cardObjForm.getRawValue())
+    }
+  }
+
+  myShowFunction(){
+    console.log("show event");
+  }
+  myHideFunction1(){
+    console.log("hide event");
+    this.addCard();
+  }
+  myHideFunction2(){
+    console.log("hide event2");
+    this.isactive2 = false;
+    if(this.focusItem == "#focus2"){
+      setTimeout(() => {
+        this.focusItem = "#focus3"
+        this.isactive2 = true;
+      }, 300);
     }
   }
 

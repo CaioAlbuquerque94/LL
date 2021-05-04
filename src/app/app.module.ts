@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -7,7 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AlbumModule } from './pages/album/album.module';
 import { HomeModule } from './pages/home/home.module';
 import { LoginModule } from './pages/login/login.module';
-import { AuthService } from './services/auth/auth.service';
+// import { AuthService } from './services/auth/auth.service';
+// import { AgendaModule } from './pages/agenda/agenda.module';
 
 @NgModule({
   declarations: [
@@ -19,10 +20,11 @@ import { AuthService } from './services/auth/auth.service';
     HomeModule,
     AlbumModule,
     HttpClientModule,
-    LoginModule
+    LoginModule,
+    // AgendaModule
   ],
   providers: [
-    AuthService
+    // AuthService,
   ],
   bootstrap: [AppComponent]
 })

@@ -7,9 +7,12 @@ import { LoginComponent } from './pages/login/login.component';
 
 export const routes: Routes = [
   { path : '', component: HomeComponent },
+  { path : 'login', component: LoginComponent },
+
   { path : 'album' , component: AlbumComponent },
   { path : 'album/:id' , component: AlbumComponent },
-  { path : 'login', component: LoginComponent }
+
+  { path : 'agenda' , loadChildren: () => import('./pages/agenda/agenda.module').then(m => m.AgendaModule)},
 ];
 
 @NgModule({

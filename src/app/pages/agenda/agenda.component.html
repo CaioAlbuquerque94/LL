@@ -1,0 +1,4 @@
+<p>agenda works!</p>
+<input [type]="'date'" [(ngModel)]="diaSelecionado" (change)="getDiaSelecionado()">
+<p>dia: {{diaSelecionado | date:"d/MM/yyyy"}}</p>
+<router-outlet></router-outlet>

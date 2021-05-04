@@ -37,7 +37,7 @@ export class UtilService {
         "texto" : "Texto de teste", "titulo" : "Titulo teste", "dataPublicacao" : null},
       {"id" : 5, "img" : "https://media-cdn.tripadvisor.com/media/photo-s/15/22/5e/31/img-20180921-wa0043-largejpg.jpg",
         "texto" : "Texto de teste", "titulo" : "Titulo teste", "dataPublicacao" : null}
-  ]
+    ]
   }
 
 }
