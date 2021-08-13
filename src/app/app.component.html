@@ -1,17 +1,24 @@
 <div class="outside">
-    <nav id="myNavbar" class="site-header py-1">
+    <nav id="myNavbar" class="site-header py-2">
         <div class="container d-flex flex-md-row justify-content-between text-center">
-            <a routerLink=""><img src="{{laco_transparente_pequeno}}" class="pr-2" alt="Inicio"></a>
+            <!-- <a routerLink=""><img src="{{laco_transparente_pequeno}}" class="pr-2" alt="Inicio"></a> -->
             <a class="py-2 d-md-inline-block" routerLink="/album">Fotos</a>
             <a class="py-2 d-md-inline-block" routerLink="/">Faça uma encomenda</a>
             <a class="py-2 d-md-inline-block" routerLink="/login">Login</a>
-            <a class="py-2 d-md-inline-block" routerLink="/agenda">Agenda</a>
+            <a class="py-2 d-md-inline-block" routerLink="/agenda" *ngIf="mostrarMenu" >Agenda</a>
+            <a routerLink="/usuario">
+                <i class="far fa-user-circle text-right fa-3x"
+                    [ngStyle]="{'color': online}"
+                ></i>
+            </a>
+        </div>
+        <div class="text-right">
         </div>
     </nav>
-    <section>
+    <!-- <section>
         <img class="laco_background_start" src="{{laco_transparente_pequeno}}" *ngIf="bigScreen" >
         <img class="laco_background_end" src="{{laco_transparente_pequeno}}" *ngIf="bigScreen">
-    </section>
+    </section> -->
     <div class="boxed-container">
         <router-outlet></router-outlet>
     </div>

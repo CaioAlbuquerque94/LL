@@ -1,7 +1,8 @@
-import { UtilService } from './../../services/util/util.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalDirective } from 'ngx-bootstrap/modal';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
+import { UtilService } from './../../services/util/util.service';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
+    public utilService: UtilService,
     public util : UtilService
   ) { }
 
@@ -28,6 +30,19 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.util.getLacosPaged(0,2,'data_publicacao').subscribe(data =>{
+      console.log(data);
+    })
+    // this.util.getFirst().subscribe(data=>{
+    //   this.newestList = [];
+    //   let obj = {
+    //     img : data[0].url,
+    //     texto : "abaCancelamento_NF006759",
+    //     titulo : "abaCancelamento_NF006759",
+    //     dataPublicacao : new Date()
+    //   }
+    //   this.newestList.push(obj);
+    // })
     // this.util.list().subscribe(data => {
     //   if(data){
     //     this.newestList = data;
@@ -85,6 +100,28 @@ export class HomeComponent implements OnInit {
         this.isactive2 = true;
       }, 300);
     }
+  }
+
+  
+  // Variable to store shortLink from api response
+  shortLink: string = "";
+  loading: boolean = false; // Flag variable
+  file: File = null; // Variable to store file
+  // On file Select
+  onChange(event) {
+    this.file = event.target.files[0];
+  }
+  onUpload() {
+    this.loading = !this.loading;
+    console.log(this.file);
+    this.utilService.upload(this.file).subscribe((event: any) => {
+      if (typeof (event) === 'object') {
+        // Short link via api response
+        this.shortLink = event.link;
+
+        this.loading = false; // Flag variable 
+      }
+    });
   }
 
 }

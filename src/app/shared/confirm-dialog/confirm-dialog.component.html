@@ -1,0 +1,31 @@
+<div bsModal #modalConfirmDialog="bs-modal" [config]="{backdrop: 'static', keyboard: false}" class="modal fade stick-up"
+    tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{titulo}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()" >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center m-t-20">
+                <div class="row">
+                    <div class="col-6 text-left">
+                        <button class="btn" [ngClass]="{'btn-danger' : (tipo=='delete'), 'btn-primary' : (tipo!='delete')}" 
+                            (click)="clickConfirm(opcoes[0])" >
+                            {{opcoes[0]}}
+                            <i class="fa fa-trash-alt ml-1"></i>
+                        </button>
+                    </div>
+                    <div class="col-6 text-right">
+                        <button class="btn btn-default" [ngClass]="{'btn-danger' : (tipo!='delete'), 'btn-primary' : (tipo=='delete')}" 
+                            (click)="clickConfirm(opcoes[1])" >
+                            {{opcoes[1]}}
+                            <i class="fa fa-times ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

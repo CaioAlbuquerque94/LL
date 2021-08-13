@@ -1,0 +1,140 @@
+<div class="m-4">
+    <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+        
+        <div class="row">
+            <div class="col-6">
+                <!-- <div class="form-group">
+                    <label for="nome">Nome </label>
+                    <input id="nome" type="text" class="form-control" placeholder="Nome" [ngModel]="usuarioLogado.nome" name="nome"
+                    required #nome="ngModel">
+                    <span *ngIf="nome.invalid && nome.touched" class="text-danger">Campo obrigatório</span>
+                </div> -->
+                <input-ll
+                    name="Nome"
+                    [showError]="true" [minlength]="3"
+                    [required]="true" [placeholder]="'Nome'"
+                    [valorInicial]="usuarioLogado.nome"
+                    (valor)="userForm.value.nome=$event"
+                ></input-ll>
+            </div>
+            
+            <div class="col-6">
+                <!-- <div class="form-group">
+                    <label for="email">Email</label>
+                    <input id="email" type="email" class="form-control" placeholder="nome@email.com" [ngModel]="usuarioLogado.email" name="email"
+                    required email #email="ngModel">
+                    <span *ngIf="email.invalid && email.touched" class="text-danger">Campo obrigatório</span>
+                </div> -->
+                <input-ll
+                    name="Email" [type]="'email'"
+                    [showError]="true"
+                    [required]="true" [placeholder]="'nome@email.com'"
+                    [valorInicial]="usuarioLogado.email"
+                    (valor)="userForm.value.email=$event"
+                ></input-ll>
+            </div>
+
+            <div class="col-6">
+                <input-ll
+                    name="Senha"
+                    [showError]="true"
+                    [required]="true" [placeholder]="'Insira uma senha'"
+                    [valorInicial]="usuarioLogado.senha"
+                    (valor)="userForm.value.senha=$event"
+                ></input-ll>
+            </div>
+
+            <div class="col-6">
+                <input-ll
+                    name="Confirme a senha"
+                    [showError]="true"
+                    [required]="true" [placeholder]="'Confirme a senha'"
+                    [valorInicial]="usuarioLogado.senha"
+                    (valor)="userForm.value.confirmesenha=$event"
+                ></input-ll>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-3">
+                <input-ll
+                    name="CEP"
+                    [showError]="true" [required]="true"
+                    [minlength]="8" [maxlength]="9"
+                    [valorInicial]="usuarioLogado.endereco.cep"
+                    (valor)="userForm.value.endereco.cep=$event"
+                ></input-ll>
+            </div>
+            <div class="col-3">
+                <input-ll
+                    name="Número"
+                    [showError]="true" [required]="true"
+                    [valorInicial]="usuarioLogado.endereco.numero"
+                    (valor)="userForm.value.endereco.numero=$event"
+                ></input-ll>
+            </div>
+            <div class="col-6">
+                <input-ll
+                    name="Complemento"
+                    [showError]="true" [required]="true"
+                    [valorInicial]="usuarioLogado.endereco.complemento"
+                    (valor)="userForm.value.endereco.complemento=$event"
+                ></input-ll>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-4 col-sm-6">
+                <input-ll
+                    name="Rua"
+                    [required]="true"
+                    [readonly]="true"
+                    [showError]="true"
+                    [valorInicial]="usuarioLogado.endereco.rua"
+                    (valor)="userForm.value.endereco.rua=$event"
+                ></input-ll>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <input-ll
+                    name="Bairro"
+                    [required]="true"
+                    [readonly]="true"
+                    [showError]="true"
+                    [valorInicial]="usuarioLogado.endereco.bairro"
+                    (valor)="userForm.value.endereco.bairro=$event"
+                ></input-ll>
+            </div>
+
+            <div class="col-md-3 col-sm-6">
+                <input-ll
+                    name="Cidade"
+                    [required]="true"
+                    [readonly]="true"
+                    [showError]="true"
+                    [valorInicial]="usuarioLogado.endereco.cidade"
+                    (valor)="userForm.value.endereco.cidade=$event"
+                ></input-ll>
+            </div>
+            
+            <div class="col-md-2 col-sm-6">
+                <div class="form-group">
+                    <input-ll
+                        name="Estado"
+                        [required]="true"
+                        [readonly]="true"
+                        [showError]="true"
+                        [valorInicial]="usuarioLogado.endereco.estado"
+                        (valor)="userForm.value.endereco.estado=$event"
+                    ></input-ll>
+                </div>
+            </div>
+        </div>
+    
+        <div class="text-right">
+            <button class="btn btn-primary" type="submit" [disabled]="userForm.invalid">Enviar</button>
+        </div>
+    </form>
+
+    
+</div>

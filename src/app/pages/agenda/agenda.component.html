@@ -1,4 +1,134 @@
-<p>agenda works!</p>
-<input [type]="'date'" [(ngModel)]="diaSelecionado" (change)="getDiaSelecionado()">
-<p>dia: {{diaSelecionado | date:"d/MM/yyyy"}}</p>
-<router-outlet></router-outlet>
+<div class="row-no-margin mt-3 text-center">
+    <div class="col-md-7 col-sm-12">
+        <div class="row">
+            <div class="col-4">
+                <div class="btn-group btn-group-sm mt-2">
+                    <div
+                        class="btn btn-primary"
+                        mwlCalendarPreviousView
+                        [view]="view"
+                        [(viewDate)]="viewDate"
+                        (viewDateChange)="closeOpenMonthViewDay()"
+                    >
+                        Anterior
+                    </div>
+        
+                    <div
+                        class="btn btn-outline-secondary"
+                        mwlCalendarToday
+                        [(viewDate)]="viewDate"
+                    >
+                        Mês atual
+                    </div>
+        
+                    <div
+                        class="btn btn-primary"
+                        mwlCalendarNextView
+                        [view]="view"
+                        [(viewDate)]="viewDate"
+                        (viewDateChange)="closeOpenMonthViewDay()"
+                    >
+                        Próximo
+                    </div>
+                </div>
+            </div>
+            <div class="col-4">
+                <h3 class="mt-2">{{ viewDate | calendarDate:(view + 'ViewTitle'):'pt' }}</h3>
+            </div>
+            <div class="col-4">
+                <!-- <input type="date" [(ngModel)]="diaSelecionado" (change)="getDiaSelecionado()"> -->
+            </div>
+        </div>
+
+        <mwl-calendar-month-view 
+            [viewDate]="viewDate"
+            [events]="listaCompraVenda"
+            [refresh]="refresh"
+            [activeDayIsOpen]="activeDayIsOpen"
+            (dayClicked)="dayClicked($event.day)"
+            (eventClicked)="handleEvent('Clicked', $event.event)"
+            (eventTimesChanged)="eventTimesChanged($event)"
+            >
+        </mwl-calendar-month-view>
+    </div>
+    <div class="col-md-5 col-sm-12">
+        <div class="card">
+            <div class="card-header" style="background-color: lightgreen;">
+                <h4 class="card-title">Criar anotação</h4>
+                <span>Adicione uma anotação de compra, venda ou informação</span>
+            </div>
+            <div class="card-body" style="background-color: silver;">
+                <div class="row">
+                    <div class="col-md-7 col-sm-12">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Título">
+                                    <span class="text-danger">*</span>Título
+                                </span>
+                            </div>
+                            <input class="form-control" required [type]="'text'" placeholder="Adicione um título" [minLength]="1" [maxLength]="20" [(ngModel)]="compraVendaForm.titulo">
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <span class="text-danger">*</span>Descrição
+                                </span>
+                            </div>
+                            <textarea class="form-control" aria-label="Adicione uma descrição" placeholder="Adicione uma descrição"
+                            [minLength]="1" [maxLength]="120" [(ngModel)]="compraVendaForm.descricao"></textarea>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Data">
+                                    <span class="text-danger">*</span>Data
+                                </span>
+                            </div>
+                            <input class="form-control" type="date" [(ngModel)]="diaSelecionado" (change)="getDiaSelecionado()" placeholder="Selecione uma data">
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-12 pl-1">
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" for="Tipo">
+                                    <span class="text-danger">*</span>Tipo
+                                </span>
+                            </div>
+                            <select class="custom-select pl-1" id="Tipo" [(ngModel)]="compraVendaForm.tipo">
+                                <option *ngFor="let tipo of tiposEventos" value="{{tipo.tipo}}" required>{{tipo.descricao}}</option>
+                            </select>
+                            <span [ngSwitch]="compraVendaForm.tipo">
+                                <i *ngSwitchCase="'compra'" class="fas fa-circle ml-2" style="color: #ad2121;"></i>
+                                <i *ngSwitchCase="'venda'" class="fas fa-circle ml-2" style="color: #1e90ff;"></i>
+                                <i *ngSwitchCase="'info'" class="fas fa-circle ml-2" style="color: #e3bc08;"></i>
+                                <i *ngSwitchDefault class="fas fa-circle ml-2" style="color: #ad2121;"></i>
+                            </span>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text" id="Valor">
+                                    <span class="text-danger">*</span>Valor
+                                </span>
+                            </div>
+                            <input class="form-control" required [type]="'number'" placeholder="0,00" [minLength]="1" [maxLength]="4" [(ngModel)]="compraVendaForm.valor">
+                        </div>
+                    </div>
+                    <div class="col-9 text-left">
+                        <div class="alert alert-danger" role="alert" *ngIf="hasError" >
+                            {{mensagemErro}}
+                        </div>
+                    </div>
+                    <div class="col-3 text-right">
+                        <button class="btn btn-primary btn-sm" (click)="salvarEvento()">Criar Evento</button>
+                        <button class="btn btn-primary" (click)="teste()">Add Card</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<confirm-dialog 
+    [mostrar]="showConfirm"
+    (retornoMostrar)="getRetornoDialog($event)"
+    [tipo]="tipoDialog">
+</confirm-dialog>
+<router-outlet *ngIf="!carregandoDia" ></router-outlet>

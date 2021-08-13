@@ -1,5 +1,9 @@
-import { EventEmitter } from '@angular/core';
-import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { EventEmitter, Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { UtilService } from '../util/util.service';
+import { Usuario } from './../../shared/usuario';
 
 @Injectable({
   providedIn: 'root'
@@ -7,15 +11,24 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   mostrarMenuEmitter = new EventEmitter<boolean>();
+  usuarioAutenticadoEmitter = new EventEmitter<Usuario>();
+  usuarioAutenticado: boolean = false;
+  
 
-  constructor() { }
+  constructor(
+    private readonly http: HttpClient,
+    private router: Router,
+    private utilService: UtilService
+  ) { }
 
-  fazerLogin(obj){
-    if(obj){
-      this.mostrarMenuEmitter.emit(true);
-      return true;
-    }else{
-      this.mostrarMenuEmitter.emit(false);
-    }
+  fazerLogin(usuario : Usuario){
+    let params = new HttpParams();
+    params = params.append("senha", usuario.senha);
+    params = params.append("email", usuario.email);
+    return this.http.get(this.utilService.API+"/user/login",{params:params});
+  }
+
+  usuarioEstaAutenticado(){
+    return this.usuarioAutenticado;
   }
 }

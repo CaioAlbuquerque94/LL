@@ -1,0 +1,17 @@
+<div class="form-group">
+    <i class="text-danger mr-1" *ngIf="required">*</i><label [for]="name">{{name}} </label>
+    <input class="form-control" [ngClass]="{'inputInvalid' : (!readonly && inputT.invalid && inputT.touched)}"
+        #inputT="ngModel"
+        [ngModel]="valorInicial"
+        (ngModelChange)="emitValor($event)"
+
+        [id]="name" 
+        [type]="type" 
+        [placeholder]="placeholder" 
+        [name]="name"
+        [required]="required" 
+        [readonly]="readonly"
+        [minlength]="minlength"
+        [maxlength]="maxlength">
+    <span *ngIf="!readonly && inputT.invalid && inputT.touched" class="text-danger">Campo obrigatório</span>
+</div>
