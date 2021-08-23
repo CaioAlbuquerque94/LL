@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit {
           this.authservice.mostrarMenuEmitter.emit(true);
           this.authservice.usuarioAutenticado = true;
           this.authservice.usuarioAutenticadoEmitter.emit(this.usuario);
-          this.router.navigateByUrl("/");
+          this.router.navigateByUrl("/agenda");
         }else{
           this.hasError = true;
           this.authservice.usuarioAutenticado = false;

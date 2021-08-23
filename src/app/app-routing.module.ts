@@ -29,7 +29,7 @@ export const routes: Routes = [
     loadChildren: () => import('./pages/usuario/usuario.module').then(m => m.UsuarioModule)
   },
 
-  { path : '', component: HomeComponent },
+  { path : '', component: LoginComponent },
 
   
   { path : '**', component: PaginaNaoEncontradaComponent },

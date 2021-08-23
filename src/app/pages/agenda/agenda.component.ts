@@ -2,11 +2,12 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent, CalendarView } from 'angular-calendar';
-import { isSameDay, isSameMonth, parseISO } from 'date-fns';
+import { isSameDay, isSameMonth } from 'date-fns';
 import _ from 'lodash';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { UtilService } from 'src/app/services/util/util.service';
+import { TipoDialog } from 'src/app/shared/tipoDialog';
 
 import { CompraVenda } from '../../shared/compraVenda';
 import { IFormCanDeactivate } from './../../guard/iFormCanDeactivate';
@@ -21,9 +22,9 @@ export class AgendaComponent implements OnInit, IFormCanDeactivate {
 
   @ViewChild("modalConfirmDialog") public modalConfirmDialog: ModalDirective;
 
-  diaSelecionado: any = new Date();
+  diaSelecionado: string;
   carregando: boolean = true;
-  carregandoDia: boolean = false;
+  exibirDetalheDiaSelecionado: boolean = false;
 
   tiposEventos: any[] = [{tipo: 'compra', descricao: 'Compra'}, {tipo: 'venda', descricao: 'Venda'}, {tipo: 'info', descricao: 'Informação'}]
   compraVendaForm: CompraVenda = new CompraVenda();
@@ -35,7 +36,8 @@ export class AgendaComponent implements OnInit, IFormCanDeactivate {
   activeDayIsOpen: boolean = true;
   refresh: Subject<any> = new Subject();//nao utilizado ainda
   showConfirm: boolean = false;
-  tipoDialog: string = "delete";
+  tipoDialog: string = TipoDialog.DELETE;
+  listaTotal: any = {compra: 0 , venda: 0};
 
   colors: any = {
     red: {
@@ -83,35 +85,8 @@ export class AgendaComponent implements OnInit, IFormCanDeactivate {
   }
 
   ngOnInit(): void {
-    this.carregando = true;
-    this.agendaService.getEventsOfMonth(new Date()).subscribe((data:CompraVenda[])=>{
-      let listEvents: CalendarEvent[] = [{
-        start: new Date(),
-        title: 'An event with no end date',
-        color: { primary: '#ad2121', secondary: '#FAE3E3' },
-        actions: [],
-      }]
-      data.forEach((compraVenda:CompraVenda) => {
-        // listEvents.push({
-        //   id: compraVenda.id,
-        //   start: new Date(this.utilService.convertStringDateToDate(compraVenda.dataEvento)),
-        //   title: compraVenda.titulo,
-        //   color: compraVenda.tipo == "compra" ? this.colors.red : compraVenda.tipo == "venda" ? this.colors.blue : this.colors.yellow,
-        //   actions: this.actions,
-        //   draggable: true,
-        //   resizable: {
-        //     beforeStart: true,
-        //     afterEnd: true,
-        //   },
-        //   meta: {descricao: compraVenda.descricao, valor: compraVenda.valor}
-        // })
-        let newEvent = this.agendaService.convertCompraVendaToCalendarEvent(compraVenda);
-        newEvent.actions = this.actions;
-        listEvents.push(newEvent);
-      })
-      this.carregando = false;
-      this.listaCompraVenda = listEvents;
-    });
+    this.getEventsOfMonth(new Date());
+    this.getTotalCVDoMes(new Date());
 
       //EXEMPLO DE LIDAR COM RETORNO PAGINADO
     // this.agendaService.getEventsPaged().subscribe((data:Pagell)=>{
@@ -149,16 +124,48 @@ export class AgendaComponent implements OnInit, IFormCanDeactivate {
     return true;
   }
 
+  getEventsOfMonth(date: Date){
+    this.carregando = true;
+    this.agendaService.getEventsOfMonth(date).subscribe((data:CompraVenda[])=>{
+      let listEvents: CalendarEvent[] = [{
+        start: new Date(),
+        title: 'An event with no end date',
+        color: { primary: '#ad2121', secondary: '#FAE3E3' },
+        actions: [],
+      }]
+      data.forEach((compraVenda:CompraVenda) => {
+        let newEvent = this.agendaService.convertCompraVendaToCalendarEvent(compraVenda);
+        newEvent.actions = this.actions;
+        listEvents.push(newEvent);
+      })
+      this.carregando = false;
+      this.listaCompraVenda = listEvents;
+    });
+  }
+
+  getTotalCVDoMes(date: Date){
+    this.agendaService.getTotalCVDoMes(date).subscribe((data:any[]) =>{
+      if(data && data.length>0){
+        for(let i=0;i<data.length;i++){
+          if(data[i].startsWith('compra')){
+              // console.log(data[i].split(',')[1]);
+              this.listaTotal.compra = data[i].split(',')[1];
+          }else if(data[i].startsWith('venda')){
+            this.listaTotal.venda =  data[i].split(',')[1];
+          }
+        }
+      }else{
+        this.listaTotal = {compra: 0, venda: 0};
+      }
+    })
+  }
+  
   getDiaSelecionado(){
-    // this.agendaService.getDayofAgenda(this.diaSelecionado).subscribe(arg => this.property = arg);
-    // this.carregandoDia = true;
-    // this.agendaService.getDayofAgenda(this.diaSelecionado);
-    // setTimeout(() => {
-    //   this.router.navigate(['/agenda',this.diaSelecionado]);
-    //   this.carregandoDia = false;
-    // }, 2000);
-    this.viewDate=parseISO(this.diaSelecionado+'');
-    this.activeDayIsOpen = false;
+    this.compraVendaForm = _.cloneDeep(this.compraVendaSelecionado);
+    this.diaSelecionado = this.utilService.convertDateToYYYYMMDD(this.utilService.convertStringDateToDate(this.compraVendaForm.dataEvento));
+    
+    // this.viewDate=parseISO(this.diaSelecionado+'');
+    // this.activeDayIsOpen = false;
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -176,9 +183,13 @@ export class AgendaComponent implements OnInit, IFormCanDeactivate {
     this.calendarEventSelecionado = event;
     this.compraVendaSelecionado = this.agendaService.convertCalendarEventToCompraVenda(event);
     switch (action) {
+      case "Clicked":
+        this.exibirDetalheDiaSelecionado = true;
+        this.getDiaSelecionado();
+        break;
       case "Edited":
-        
-
+        this.exibirDetalheDiaSelecionado = true;
+        this.getDiaSelecionado();
         // this.agendaService.editCompraVenda(compraVenda).subscribe(data =>{
         //   if(data){
         //     for (let i = 0; i < this.listaCompraVenda.length; i++) {
@@ -192,11 +203,12 @@ export class AgendaComponent implements OnInit, IFormCanDeactivate {
         break;
 
       case "Deleted":
+        this.tipoDialog = TipoDialog.DELETE;
         this.showConfirm = true;
-        this.tipoDialog = "delete";
         break;
       
       default:
+        this.exibirDetalheDiaSelecionado = true;
         // this.agendaService.editCompraVenda(compraVenda).subscribe(data =>{
         //   if(data){
         //     for (let i = 0; i < this.listaCompraVenda.length; i++) {
@@ -240,33 +252,23 @@ export class AgendaComponent implements OnInit, IFormCanDeactivate {
   }
   
   teste(){
-    this.showConfirm = true;
-    // this.modalConfirmDialog.show();
   }
 
-  salvarEvento(){
+  salvarEditarAnotacao(){
     this.hasError = false;
     this.mensagemErro = '';
     if(this.compraVendaForm.titulo && this.compraVendaForm.descricao && this.diaSelecionado){
-      this.compraVendaForm.dataEvento = new DatePipe('en-US').transform(this.diaSelecionado, 'dd/MM/yyyy');//this.datepipe.transform(this.diaSelecionado, 'dd/MM/yyyy');
+      this.compraVendaForm.dataEvento = new DatePipe('en-US').transform(this.diaSelecionado, 'dd/MM/yyyy');
       this.carregando = true;
-      this.agendaService.addCompraVenda(this.compraVendaForm).subscribe((data: CompraVenda) =>{
+
+      this.agendaService.criarEditarCompraVenda(this.compraVendaForm).subscribe((data: CompraVenda) =>{
         if(data){
           this.hasError = false;
           this.mensagemErro = '';
-          // let newCompraVenda : CalendarEvent = {
-          //   id: data.id,
-          //   title: data.titulo,
-          //   start: parseISO(this.diaSelecionado+''),//startOfDay(new Date(this.viewDate)),
-          //   end: parseISO(this.diaSelecionado+''),//endOfDay(new Date(this.viewDate)),
-          //   color: data.tipo == "compra" ? this.colors.red : data.tipo == "venda" ? this.colors.blue : this.colors.yellow,
-          //   actions: this.actions,
-          //   draggable: true,
-          //   resizable: {
-          //     beforeStart: true,
-          //     afterEnd: true,
-          //   },
-          // }
+          if(this.compraVendaForm.id && this.compraVendaForm.id > 0){
+            this.listaCompraVenda = this.listaCompraVenda.filter((iEvent) => iEvent !== this.calendarEventSelecionado);
+            this.exibirDetalheDiaSelecionado = false;
+          }
           let newCompraVenda : CalendarEvent = this.agendaService.convertCompraVendaToCalendarEvent(data);
           newCompraVenda.actions = this.actions;
           this.listaCompraVenda.push(newCompraVenda);
@@ -282,11 +284,10 @@ export class AgendaComponent implements OnInit, IFormCanDeactivate {
       },() =>{
         this.refresh.next();
         this.carregando = false;
+        this.compraVendaForm = new CompraVenda();
+        this.compraVendaForm.tipo = this.tiposEventos[0].tipo;
       })
-      this.compraVendaForm = new CompraVenda();
-      this.compraVendaForm.tipo = this.tiposEventos[0].tipo;
     }else{
-      //identificar erro e exibir em tela
       this.hasError = true;
       this.mensagemErro = 'Verifique os campos obrigatórios';
       this.carregando = false;
@@ -300,11 +301,18 @@ export class AgendaComponent implements OnInit, IFormCanDeactivate {
 
   closeOpenMonthViewDay(){
     this.activeDayIsOpen = false;
+    this.getEventsOfMonth(this.viewDate);
+    this.getTotalCVDoMes(this.viewDate);
   }
 
   getRetornoDialog(event){
-    if(this.tipoDialog == "delete" && event){
-      this.deleteCompraVenda();
+    this.showConfirm = false;
+    if(event){
+      if(this.tipoDialog == TipoDialog.DELETE){
+        this.deleteCompraVenda();
+      }else if(this.tipoDialog == TipoDialog.CANCELA_ALTERACAO){
+        this.cancelarAlteracao();
+      }
     }
   }
 
@@ -315,4 +323,18 @@ export class AgendaComponent implements OnInit, IFormCanDeactivate {
       }
     })
   }
+
+  cancelarAlteracao(){
+    this.refresh.next();
+    this.exibirDetalheDiaSelecionado = false;
+    this.diaSelecionado = this.utilService.convertDateToYYYYMMDD(new Date());
+    this.compraVendaForm = new CompraVenda();
+    this.compraVendaForm.tipo = this.tiposEventos[0].tipo;
+  }
+
+  abrirCancelaAlteracao(){
+    this.tipoDialog = TipoDialog.CANCELA_ALTERACAO;
+    this.showConfirm = true;
+  }
+
 }

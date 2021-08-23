@@ -36,3 +36,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   bottom: 15px;
   right: 10px;
 }
+
+.input_nonborder{
+  background: none !important;
+  border: none;
+  border-bottom: revert;
+  outline: none;
+  border-bottom-color: black;
+}

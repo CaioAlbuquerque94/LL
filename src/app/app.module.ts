@@ -16,8 +16,6 @@ import { PaginaNaoEncontradaComponent } from './pages/pagina-nao-encontrada/pagi
 import { ConfirmDialogModule } from './shared/confirm-dialog/confirm-dialog.module';
 
 registerLocaleData(localept, 'pt');
-
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +33,7 @@ registerLocaleData(localept, 'pt');
     ConfirmDialogModule,
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: "pt-BR" }
+    { provide: LOCALE_ID, useValue: "pt-BR" },
   ],
   bootstrap: [AppComponent]
 })

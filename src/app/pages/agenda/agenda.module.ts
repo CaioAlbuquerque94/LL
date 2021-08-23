@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AgendaComponent } from './agenda.component';
-import { AgendaDetalheComponent } from './agenda-detalhe/agenda-detalhe.component';
 import { AgendaRoutingModule } from './agenda.routing.module';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
@@ -14,7 +13,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 @NgModule({
   declarations: [
     AgendaComponent,
-    AgendaDetalheComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +23,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     }),
     AgendaRoutingModule,
     ConfirmDialogModule,
-    ModalModule
+    ModalModule,
   ],
   providers:[
     AgendaCanDeactivateGuard

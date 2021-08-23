@@ -1,3 +1,4 @@
+import { TipoDialog } from './../tipoDialog';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 
@@ -10,24 +11,26 @@ export class ConfirmDialogComponent implements OnInit {
 
   @ViewChild("modalConfirmDialog") public modalConfirmDialog: ModalDirective;
   @Output('retornoMostrar') retornoMostrar = new EventEmitter<boolean>();
-  // @Output() valor: any = new EventEmitter();
   @Input('mostrar') set setMostrarValue(value) {
     if(value){
       this.modalConfirmDialog.show();
-      // this.retornoMostrar.emit(true);
     }else{
       if(this.modalConfirmDialog){
         this.modalConfirmDialog.hide();
       }
-      // this.retornoMostrar.emit(false);
     }
   }
   @Input('tipo') set setTipoValue(value) {
     if(value){
       this.tipo = value;
       switch (value) {
-        case 'delete':
+        case TipoDialog.DELETE:
           this.titulo = "Você tem certeza que deseja excluir este item?";
+          this.opcoes = ["SIM", "NÃO"];
+          break;
+
+        case TipoDialog.CANCELA_ALTERACAO:
+          this.titulo = "Você tem certeza que deseja cancelar as alterações?";
           this.opcoes = ["SIM", "NÃO"];
           break;
       
@@ -52,7 +55,7 @@ export class ConfirmDialogComponent implements OnInit {
   
   clickConfirm(opcao){
     switch (this.tipo) {
-      case 'delete':
+      case TipoDialog.DELETE:
         if(opcao == "SIM"){
           this.retornoMostrar.emit(true);
         }else{
@@ -60,7 +63,16 @@ export class ConfirmDialogComponent implements OnInit {
         }
         this.close();
         break;
-    
+
+      case TipoDialog.CANCELA_ALTERACAO:
+        if(opcao == "SIM"){
+          this.retornoMostrar.emit(true);
+        }else{
+          this.retornoMostrar.emit(false);
+        }
+        this.close();
+        break;
+
       default:
         break;
     }

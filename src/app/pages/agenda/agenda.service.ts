@@ -81,7 +81,7 @@ export class AgendaService {
     return this.http.get(this.utilService.API+"/compraVenda/listPaged",{params:params});
   }
 
-  addCompraVenda(compraVenda : CompraVenda){
+  criarEditarCompraVenda(compraVenda : CompraVenda){
     return this.http.post(this.utilService.API+"/compraVenda/createCompraVenda",JSON.parse(JSON.stringify(compraVenda)));
   }
 
@@ -91,6 +91,13 @@ export class AgendaService {
 
   deleteCompraVenda(id: Number){
     return this.http.delete(this.utilService.API+"/compraVenda/deleteCompraVenda/"+id);
+  }
+
+  getTotalCVDoMes(date: Date){
+    let params = new HttpParams();
+    params = params.append("start", this.utilService.converterDateAngularParaStringDateJava(this.utilService.getFirstDayOfMonth(date)));
+    params = params.append("end", this.utilService.converterDateAngularParaStringDateJava(this.utilService.getLastDayOfMonth(date)));
+    return this.http.get(this.utilService.API+"/compraVenda/getTotalCVDoMes",{params:params});
   }
 
 }
